@@ -21,6 +21,7 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "@/firebase";
+import SidebarOptions from "./SidebarOptions";
 
 interface RoomDocument extends DocumentData {
   createdAt: string;
@@ -89,11 +90,9 @@ function Sidebar() {
     <>
       <NewDocumentButton />
 
-
       <div className="flex py-4 flex-col space-y-4 md:max-w-36">
-
-
-      {/*My documents*/}
+      
+      {/*My Documents*/}
       {groupedData.owner.length===0?(
         <h2 className="text-gray-500 font-semibold text-sm">No documents found</h2>
       ):(
@@ -101,20 +100,27 @@ function Sidebar() {
           <h2 className="text-gray-500 font-semibold text-sm">My documents</h2>
 
           {groupedData.owner.map((doc)=>(
-            <p key={doc.id}>{doc.roomId}</p>
-            // <SidebarOption key={doc.id} href={`/doc/${doc.id}`}/>
+            <SidebarOptions key={doc.id} id={doc.id} href={`/doc/${doc.id}`}/>
           ))}
-          
-        </>
-        
-        
+        </> 
       )}
       </div>
 
-      {/* {List...} */}
+      
 
       {/* {Shared with me} */}
-      {/* {List...} */}
+
+      {groupedData.editor.length>0 &&(
+        <>
+        <h2 className="text-gray-500 font-semibold text-sm">
+          Shared with me
+        </h2>
+        {groupedData.editor.map((doc)=>(
+          <SidebarOptions key={doc.id} id={doc.id} href={`/doc/${doc.id}`}/>
+        ))}
+        </>
+      )}
+      
     </>
   );
 

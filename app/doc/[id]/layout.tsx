@@ -1,5 +1,6 @@
 
 
+import RoomProvider from '@/components/RoomProvider';
 import React from 'react'
 
 function DocLayout({children,params:{id}}:{
@@ -10,7 +11,7 @@ function DocLayout({children,params:{id}}:{
     
 
   return (
-    <div>{children}</div>
+    <RoomProvider roomId='id'>{children}</RoomProvider>
   )
 }
 

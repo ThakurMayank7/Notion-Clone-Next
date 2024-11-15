@@ -1,5 +1,7 @@
+'use client';
+
 import React, { useState } from "react";
-import { useEffect,useState } from "react";
+import { useEffect } from "react";
 import NewDocumentButton from "./NewDocumentButton";
 
 import {
@@ -87,17 +89,28 @@ function Sidebar() {
     <>
       <NewDocumentButton />
 
+
+      <div className="flex py-4 flex-col space-y-4 md:max-w-36">
+
+
       {/*My documents*/}
-      {groupedData.owner.length>0?(
+      {groupedData.owner.length===0?(
         <h2 className="text-gray-500 font-semibold text-sm">No documents found</h2>
       ):(
         <>
           <h2 className="text-gray-500 font-semibold text-sm">My documents</h2>
+
+          {groupedData.owner.map((doc)=>(
+            <p key={doc.id}>{doc.roomId}</p>
+            // <SidebarOption key={doc.id} href={`/doc/${doc.id}`}/>
+          ))}
           
         </>
         
         
       )}
+      </div>
+
       {/* {List...} */}
 
       {/* {Shared with me} */}

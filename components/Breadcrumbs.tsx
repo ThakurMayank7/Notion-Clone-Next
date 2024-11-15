@@ -1,46 +1,51 @@
-'use client';
+"use client";
 
-import { usePathname } from 'next/navigation';
-import React, { Fragment } from 'react'
+import { usePathname } from "next/navigation";
+import React, { Fragment } from "react";
 
 import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbSeparator,
-  } from "@/components/ui/breadcrumb"
-  
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 function Breadcrumbs() {
-    const pathname=usePathname();
+  const pathname = usePathname();
 
-    const segments = pathname.split('/');
+  const segments = pathname.split("/");
 
   return (
     <Breadcrumb>
-  <BreadcrumbList>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/">Home</BreadcrumbLink>
-    </BreadcrumbItem>
-    {segments.map((segment,index)=> {
-        if(!segment) return null;
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+        </BreadcrumbItem>
+        {segments.map((segment, index) => {
+          if (!segment) return null;
 
-        const href=`/${segments.slice(0,index+1).join("/")}`;
+          const href = `/${segments.slice(0, index + 1).join("/")}`;
 
-        return(
+          const isLast = index === segments.length - 1;
+
+          return (
             <Fragment key={segment}>
-            <BreadcrumbSeparator/>
-            <BreadcrumbItem>
-                <BreadcrumbLink href={href}>{segment}</BreadcrumbLink>
-            </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                {isLast ? (
+                  <BreadcrumbPage>{segment}</BreadcrumbPage>
+                ) : (
+                  <BreadcrumbLink href={href}>{segment}</BreadcrumbLink>
+                )}
+              </BreadcrumbItem>
             </Fragment>
-        );
-    })}
-  </BreadcrumbList>
-</Breadcrumb>
-
-  )
+          );
+        })}
+      </BreadcrumbList>
+    </Breadcrumb>
+  );
 }
 
-export default Breadcrumbs
+export default Breadcrumbs;

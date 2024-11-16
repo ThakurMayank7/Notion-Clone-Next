@@ -21,6 +21,7 @@ import useOwner from "@/lib/useOwner";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { collectionGroup, query, where } from "firebase/firestore";
 import { db } from "@/firebase";
+import { removeUserFromDocument } from "@/actions/actions";
 
 
 function ManageUsers() {
@@ -45,7 +46,19 @@ function ManageUsers() {
     
 
     const handleDelete=(userId:string)=>{
+        startTransition(async ()=>{
+            if(!user) return;
 
+            const {success}=await removeUserFromDocument(room.id,userId);
+
+            if(success)
+            {
+                toast.success("User removed from room successfully!");
+            }
+            else{
+                toast.error("Failed to remove user from room");
+            }
+        });
     }
 
   return (
@@ -64,7 +77,7 @@ function ManageUsers() {
 
         <hr className="my-2"/>
 
-        <div>
+        <div className="flex flex-col space-y-2">
             {usersInRoom?.docs.map((doc)=>(
                 <div key={doc.data().userId}
                 className="flex items-center justify-between"

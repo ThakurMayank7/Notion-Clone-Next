@@ -7,6 +7,7 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '@/firebase';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import useOwner from '@/lib/useOwner';
+import Editor from './editor';
 
 function Document({id}:{id:string}) {
 
@@ -68,7 +69,12 @@ function Document({id}:{id:string}) {
 
         {/*Avatars*/}
       </div>
+
+      <hr className='pb-10'/>
+
+
       {/*Collaborative Editor*/}
+      <Editor/>
     </div>
   )
 }

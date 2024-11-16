@@ -7,7 +7,8 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '@/firebase';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import useOwner from '@/lib/useOwner';
-import Editor from './editor';
+import Editor from './Editor';
+import DeleteDocument from './DeleteDocument';
 
 function Document({id}:{id:string}) {
 
@@ -52,13 +53,20 @@ function Document({id}:{id:string}) {
       onSubmit={updateTitle}>
         <Input value={input} onChange={(e)=> setInput(e.target.value)}/>
 
+          
         <Button disabled={isUpdating}>
           {
             isUpdating ? "Updating..." : "Update"
           }
         </Button>
 
-        {/*update title...*/}
+
+
+        {!isOwner &&(
+          <>
+            <DeleteDocument/>
+          </>
+        )}
 
         {/*if  isOwner && InviteUser ,DeketeDocument*/}
       </form>

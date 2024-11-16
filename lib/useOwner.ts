@@ -18,18 +18,18 @@ function useOwner() {
   useEffect(()=>{
     if(usersInRoom?.docs && usersInRoom.docs.length>0)
     {
-        const owners=usersInRoom.docs.filter((doc)=>
-            doc.data().role==="owner"
+        const owners=usersInRoom.docs.filter(
+            (doc)=>doc.data().role==="owner"
         );
+        console.log("reached here");
         if(
             owners.some(
             (owner)=> owner.data().userId===user?.emailAddresses[0].toString()
         )
     )
-        {
-
-        }
+    {setIsOwner(true);
         
+    }
     }
   },[usersInRoom,user]);
 

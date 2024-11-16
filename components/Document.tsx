@@ -44,7 +44,7 @@ function Document({id}:{id:string}) {
 
 
   return (
-    <div>
+    <div className="flex-1 h-full bg-white p-5">
 
     <div className='flex max-w-6xl mx-auto justify-between p-5'>
       <form 

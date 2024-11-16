@@ -9,6 +9,7 @@ import { useDocumentData } from 'react-firebase-hooks/firestore';
 import useOwner from '@/lib/useOwner';
 import Editor from './Editor';
 import DeleteDocument from './DeleteDocument';
+import InviteUser from './InviteUser';
 
 function Document({id}:{id:string}) {
 
@@ -64,11 +65,12 @@ function Document({id}:{id:string}) {
 
         {!isOwner &&(
           <>
+            <InviteUser/>
             <DeleteDocument/>
           </>
         )}
 
-        {/*if  isOwner && InviteUser ,DeketeDocument*/}
+        
       </form>
     </div>
 

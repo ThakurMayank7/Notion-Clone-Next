@@ -6,6 +6,8 @@ import { auth } from "@clerk/nextjs/server";
 
 export async function createNewDocument() {
 
+    auth.protect();
+
     const {sessionClaims}=await auth();
 
     if (!sessionClaims || !sessionClaims.email) {
@@ -61,4 +63,31 @@ export async function deleteDocument(roomId:string){
         console.log(error);
         return {success:false}
     }
+}
+
+export async function inviteUserToDocument(roomId:string, email:string){
+
+    auth.protect();
+
+    console.log("inviteUserToDocument",roomId,email);
+
+    try
+    {
+        await adminDb
+        .collection("users")
+        .doc(email)
+        .collection("rooms")
+        .doc(roomId)
+        .set({userId:email,
+            role:"editor",
+            createdAt:new Date(),
+            roomId
+        });
+        return {success:true}
+    }
+    catch(error){
+        console.error(error);
+        return{success:false}
+    }
+
 }

@@ -104,7 +104,6 @@ function Sidebar() {
           ))}
         </> 
       )}
-      </div>
 
       
 
@@ -120,6 +119,7 @@ function Sidebar() {
         ))}
         </>
       )}
+      </div>
       
     </>
   );

@@ -45,14 +45,14 @@ function ManageUsers() {
     
 
     const handleDelete=(userId:string)=>{
-        
+
     }
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <Button asChild variant="outline">
 
-      <DialogTrigger>Users</DialogTrigger>
+      <DialogTrigger>Users ({usersInRoom?.docs.length})</DialogTrigger>
         </Button>
       <DialogContent>
         <DialogHeader>
@@ -65,7 +65,34 @@ function ManageUsers() {
         <hr className="my-2"/>
 
         <div>
-            {/* UsersInRoom */}
+            {usersInRoom?.docs.map((doc)=>(
+                <div key={doc.data().userId}
+                className="flex items-center justify-between"
+                >
+                    <p className="font-light">
+                        {doc.data().userId===user?.emailAddresses[0].toString()?`You (${doc.data().userId})`
+                        :doc.data().userId}
+                    </p>
+
+                    <div className="flex items-center gap-2">
+                        <Button variant="outline">
+                            {doc.data().role}
+                        </Button>
+
+                        {!isOwner && 
+                        doc.data().userId !==user?.emailAddresses[0].toString()
+                        && (
+                            <Button variant="destructive"
+                            onClick={()=>{handleDelete(doc.data().userId)}}
+                            disabled={isPending}
+                            size="sm"
+                            >
+                                {isPending?"Removing...":"X"}
+                            </Button>
+                        )}
+                    </div>
+                </div>
+            ))}
         </div>
 
       </DialogContent>

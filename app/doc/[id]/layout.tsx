@@ -11,7 +11,7 @@ function DocLayout({children,params:{id}}:{
     
 
   return (
-    <RoomProvider roomId='id'>{children}</RoomProvider>
+    <RoomProvider roomId={id}>{children}</RoomProvider>
   )
 }
 

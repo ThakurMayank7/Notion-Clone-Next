@@ -6,15 +6,14 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
+  
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
-import { DialogClose } from "@radix-ui/react-dialog";
-import { usePathname,useRouter } from "next/navigation";
-import { deleteDocument, inviteUserToDocument } from "@/actions/actions";
+import { usePathname} from "next/navigation";
+import {  inviteUserToDocument } from "@/actions/actions";
 import { toast } from "sonner";
 import { Input } from "./ui/input";
 
@@ -27,8 +26,6 @@ function InviteUser() {
     const [isPending,startTransition]=useTransition();
 
     const pathname=usePathname();
-
-    const router=useRouter();
 
     const handleInvite=async (e:FormEvent)=>{
         

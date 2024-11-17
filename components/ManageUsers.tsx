@@ -1,12 +1,11 @@
 "use client";
 
-import React, { FormEvent, useState, useTransition } from "react";
+import React, {  useState, useTransition } from "react";
 
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,

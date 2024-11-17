@@ -10,6 +10,8 @@ function LiveCursorProvider({ children }: {
 
     const [myPresence, updateMyPresence] = useMyPresence();
 
+    console.log(myPresence)
+
     const others = useOthers();
 
 

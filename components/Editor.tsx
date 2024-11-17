@@ -17,7 +17,7 @@ import stringToColor from "@/lib/stringToColor";
 
 type EditorProps={
     doc:Y.Doc;
-    provider:any;
+    provider:unknown;
     darkMode:boolean;
 };
 
